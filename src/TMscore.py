@@ -13,8 +13,11 @@ class TMscore():
 
         self.rmsd = None
         self.gdt_ts = None
+        self.gdt_ts_info = None
         self.gdt_ha = None
+        self.gdt_ha_info = None
         self.tm_score = None
+        self.maxsub = None
 
     def __call__(self, prot_a, prot_b):
         if os.path.isfile(prot_a) and os.path.isfile(prot_b):
@@ -26,18 +29,31 @@ class TMscore():
                     self.tm_score = float(x[2])
                 elif x[0] == "GDT-TS-score=":
                     self.gdt_ts = float(x[1])
+                    a = float(x[2].split('=')[1])
+                    b = float(x[3].split('=')[1])
+                    c = float(x[4].split('=')[1])
+                    d = float(x[5].split('=')[1])
+                    self.gdt_ts_info = (a, b, c, d)
                 elif x[0] == "GDT-HA-score=":
                     self.gdt_ha = float(x[1])
+                    a = float(x[2].split('=')[1])
+                    b = float(x[3].split('=')[1])
+                    c = float(x[4].split('=')[1])
+                    d = float(x[5].split('=')[1])
+                    self.gdt_ha_info = (a, b, c, d)
                 elif x[0] == "RMSD":
                     self.rmsd = float(x[5])
+                elif x[0] == "MaxSub-score=":
+                    self.maxsub = float(x[1])
         else:
             raise Exception("Check that %s and %s exists" % (prot_a, prot_b))
 
-    def info(self):
+    def print_info(self):
         print(self.rmsd)
         print(self.tm_score)
-        print(self.gdt_ts)
-        print(self.gdt_ha)
+        print(self.get_gdt_ts_info())
+        print(self.get_gdt_ha_info())
+        print(self.maxsub)
 
     def get_rmsd(self):
         return self.rmsd
@@ -45,14 +61,23 @@ class TMscore():
     def get_gdt_ts(self):
         return self.gdt_ts
 
+    def get_gdt_ts_info(self):
+        return (self.gdt_ts, self.gdt_ts_info)
+
     def get_gdt_ha(self):
         return self.gdt_ha
 
+    def get_gdt_ha_info(self):
+        return (self.gdt_ha, self.gdt_ha_info)
+
     def get_tm_score(self):
         return self.tm_score
+
+    def get_maxsub(self):
+        return self.maxsub
 
 
 if __name__ == "__main__":
     tmscore = TMscore("./TMscore")
     tmscore("./1crn.pdb", "./best.pdb")
-    tmscore.info()
+    tmscore.print_info()
