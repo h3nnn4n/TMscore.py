@@ -1,4 +1,5 @@
 import re
+import os
 import os.path
 import subprocess
 
@@ -6,7 +7,7 @@ import subprocess
 class TMscore():
     def __init__(self, path):
         if os.path.isfile(path):
-            self.path = path
+            self.path = os.getcwd() + "/" + path
             pass
         else:
             raise Exception("%s was not found" % path)
