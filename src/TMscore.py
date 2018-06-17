@@ -77,6 +77,15 @@ class TMscore():
     def get_maxsub(self):
         return self.maxsub
 
+    def get_all(self):
+        a = {}
+        a['rmsd'] = self.rmsd
+        a['gdt_ts'] = self.get_gdt_ts_info()
+        a['gdt_ha'] = self.get_gdt_ha_info()
+        a['maxsub'] = self.maxsub
+        a['tm_score'] = self.tm_score
+
+        return a
 
 if __name__ == "__main__":
     tmscore = TMscore("./TMscore")
