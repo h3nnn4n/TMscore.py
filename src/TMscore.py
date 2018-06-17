@@ -39,6 +39,18 @@ class TMscore():
         print(self.gdt_ts)
         print(self.gdt_ha)
 
+    def get_rmsd(self):
+        return self.rmsd
+
+    def get_gdt_ts(self):
+        return self.gdt_ts
+
+    def get_gdt_ha(self):
+        return self.gdt_ha
+
+    def get_tm_score(self):
+        return self.tm_score
+
 
 if __name__ == "__main__":
     tmscore = TMscore("./TMscore")
