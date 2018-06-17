@@ -51,9 +51,9 @@ class TMscore():
     def print_info(self):
         print(self.rmsd)
         print(self.tm_score)
+        print(self.maxsub)
         print(self.get_gdt_ts_info())
         print(self.get_gdt_ha_info())
-        print(self.maxsub)
 
     def get_rmsd(self):
         return self.rmsd
@@ -79,5 +79,5 @@ class TMscore():
 
 if __name__ == "__main__":
     tmscore = TMscore("./TMscore")
-    tmscore("./1crn.pdb", "./best.pdb")
+    tmscore("../proteins/1crn.pdb", "../proteins/best.pdb")
     tmscore.print_info()
