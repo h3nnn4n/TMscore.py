@@ -86,3 +86,8 @@ class TMscore():
         a['tm_score'] = self.tm_score
 
         return a
+
+if __name__ == "__main__":
+    tmscore = TMscore("./TMscore")
+    tmscore("../proteins/1crn.pdb", "../proteins/best.pdb")
+    tmscore.print_info()
