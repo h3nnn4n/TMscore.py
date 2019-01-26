@@ -25,7 +25,7 @@ class TMscore():
             out = subprocess.check_output([self.path, prot_a, prot_b])
             data = str(out).split("\\n")
             for d in data:
-                x = re.sub("\s\s+", " ", d).split(' ')
+                x = re.sub(r"\s\s+", " ", d).split(' ')
                 if x[0] == "TM-score" and x[1] == "=":
                     self.tm_score = float(x[2])
                 elif x[0] == "GDT-TS-score=":
@@ -86,8 +86,3 @@ class TMscore():
         a['tm_score'] = self.tm_score
 
         return a
-
-if __name__ == "__main__":
-    tmscore = TMscore("./TMscore")
-    tmscore("../proteins/1crn.pdb", "../proteins/best.pdb")
-    tmscore.print_info()

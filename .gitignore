@@ -101,7 +101,6 @@ ENV/
 .mypy_cache/
 
 TMscore
-TMscore.f
 
 *.swp
 *.swo
