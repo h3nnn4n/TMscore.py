@@ -1,16 +1,13 @@
 import re
 import os
 import os.path
+import errno
 import subprocess
 
 
 class TMscore():
-    def __init__(self, path):
-        if os.path.isfile(path):
-            self.path = os.getcwd() + "/" + path
-            pass
-        else:
-            raise Exception("%s was not found" % path)
+    def __init__(self, path=None):
+        self.setup_path(path)
 
         self.rmsd = None
         self.gdt_ts = None
@@ -19,6 +16,19 @@ class TMscore():
         self.gdt_ha_info = None
         self.tm_score = None
         self.maxsub = None
+
+    def setup_path(self, path):
+        if path is None:
+            path = './TMscore'
+
+        if os.path.isfile(path):
+            self.path = os.path.join(os.getcwd(), path)
+        else:
+            raise FileNotFoundError(
+                errno.ENOENT,
+                os.strerror(errno.ENOENT),
+                path
+            )
 
     def __call__(self, prot_a, prot_b):
         if os.path.isfile(prot_a) and os.path.isfile(prot_b):
